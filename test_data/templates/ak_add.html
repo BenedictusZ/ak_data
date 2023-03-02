@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block css %}
+    {# Include FontAwesome; required for icon display #}
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css">
+    {{ form.media }}
+{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12" style="padding: 0px">
+            <div class="card">
+                <div class="card-header">
+                    迭代数据添加页面
+                </div>
+                <div class="card-body" style="height: 800px">
+                    <form method="post" action="/ak/ak_add/" id="testdada_add">
+                        <div class="form-row">
+                            {% csrf_token %}
+                            {% for foo in form %}
+                                <div class="form-group col-md-3">
+                                    <label>{{ foo.label }}</label>
+                                    {{ foo }}
+                                    <span style="color: red">{{ foo.errors.0 }}</span>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+
+                        <button type="submit" class="btn btn-primary" style="width: 150px">保存</button>
+                        <button type="button" class="btn btn-secondary" style="width: 150px " data-dismiss="modal">
+                            <a href="/ak/" class="text-white">返回</a>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block css %}
+    {# Include FontAwesome; required for icon display #}
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css">
+    {{ form.media }}
+{% endblock %}
+
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <div class="left" style="float: left">
+                    <div style="font-size: 20px;" class="">
+                        测试数据列表
+                    </div>
+                </div>
+                <div class="right" style="float: right">
+                    <button type="button" class="btn btn-primary">
+                        <a href="/ak/data_add/" class="text-white">数据入库</a>
+                    </button>
+                </div>
+
+            </div>
+            <div class="card-body" style="width: auto">
+                <table class="table table-bordered table-hover">
+                    <caption>List of users</caption>
+                    <thead class="thead" style="background-color: #9980c9">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">系统名</th>
+                        <th scope="col">版本号</th>
+                        <th scope="col">发布日期</th>
+                        <th scope="col">缺陷总数</th>
+                        <th scope="col">缺陷密度</th>
+                        <th scope="col">一次性关闭率</th>
+                        <th scope="col">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for obj in queryset %}
+                        <tr>
+                            <th>{{ obj.id }}</th>
+                            <td>{{ obj.get_n_systemtype_display }}</td>
+                            <td>{{ obj.c_version }}</td>
+                            <td>{{ obj.dt_publish_date|date:"Y-m-d" }}</td>
+                            <td>{{ obj.n_qxsl }}</td>
+                            <td>{{ obj.n_qxmd }}</td>
+                            <td>{{ obj.n_ycxgbl }}%</td>
+                            <td>
+                                <a class="btn btn-primary btn-xs" href="/admin/{{ obj.id }}/edit/">编辑</a>
+                                <a class="btn btn-danger btn-xs" href="/admin/{{ obj.id }}/delete/">删除</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+            <ul class="pagination">
+                {{ page_string }}
+            </ul>
+        </div>
+
+
+    </div>
+
+
+
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>案款团队测试数据平台</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+
+    {% comment %}daterangedate{% endcomment %}
+    <script type="text/javascript" src="{% static 'plugins/daterangepicker-master/moment.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plugins/daterangepicker-master/daterangepicker.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/daterangepicker-master/daterangepicker.css' %}">
+
+    {% block css %}{% endblock %}
+</head>
+
+<body>
+
+<div class="container-fluid">
+
+    {#1、导航栏#}
+    <div class="row">
+        <nav class="col-sm-12 navbar navbar-expand-lg navbar-light"
+             style="background-color: #6f42c1;height: 60px;width: auto">
+            <div class="navbar-nav">
+                <a class="navbar-brand" href="/ak/">
+                    <img src="{% static 'img/icon.svg' %}" style="height: 60px">
+                </a>
+                <div class="collapse navbar-collapse">
+                    <strong><a style="font-size: 30px"
+                               class="text-white text-decoration-none">案款团队测试数据</a></strong>
+                </div>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="margin-left: 40px">
+                    <div class="navbar-nav" style="font-size: 20px">
+                        <a class="nav-link text-white" href="/ak/">案款系统</a>
+                        <a class="nav-link text-white" href="/fy/">法银系统</a>
+                        <a class="nav-link text-white" href="/sz/">涉众系统</a>
+                        <a class="nav-link text-white" href="/test/">测试相关数据</a>
+                        <a class="nav-link text-white" href="/trash/">【测试页面专用】</a>
+                        <a class="nav-link text-white" href="/itdata/">迭代数据</a>
+                        <a class="nav-link text-white" href="/ordata/">工单数据</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+    {#    中间变化内容#}
+    {% block content %}
+    {% endblock %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
+<script src="{% static 'js/echarts.min.js' %}"></script>
+
+
+
+
+{% block js %}
+{% endblock %}
+
+</body>
+</html>

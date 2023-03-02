@@ -1,0 +1,620 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block css %}
+    {# Include FontAwesome; required for icon display #}
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css">
+    {{ form.media }}
+{% endblock %}
+
+
+{% block content %}
+    {#2、主要数据相关#}
+    {#    2.1 筛选标签#}
+    <div class="row">
+        <div style="height:auto;width: 100%;padding: 0px;background-color: #7a4cce">
+            <div style="margin-left:85%;padding: 0px;">
+                <div id="reportrange"
+                     style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 258px;border-radius: 8px">
+                    <i class="fa fa-calendar"></i>&nbsp;
+                    <span></span> <i class="fa fa-caret-down"></i>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="height: 250px;background-color: mediumpurple">
+        <div class="col-sm-12" style="padding: 0px">
+            <div class="row" style="margin-top: 80px;margin-left: 20px">
+                <div class="col-sm-3">
+                    <div style="width: 300px;height: 120px;background-color: white;border-radius: 24px">
+                        <a style="float: left">
+                            <ul style="list-style-type:none">
+                                <li style="margin-top: 20px;"><span>已发布版本数</span></li>
+                                <li style="font-size: 30px" id="ak_bbs" class="font-weight-bold">{{ ak_bbs }}</li>
+                            </ul>
+                        </a>
+                        <a style="float: right;margin-top: 20px;margin-right: 30px;">
+                            <svg t="1675088990988" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                 xmlns="http://www.w3.org/2000/svg" p-id="3745" width="70" height="70">
+                                <path d="M290.15 503.877l-149.461-2.114v333.16H290.15z" fill="#D73949"
+                                      p-id="3746"></path>
+                                <path d="M497.316 227.066l-149.462-3.883v611.74h149.462z" fill="#0CA294" p-id="3747"
+                                      data-spm-anchor-id="a313x.7781069.0.i6" class=""></path>
+                                <path d="M704.481 368.468l-149.461-2.98v469.435h149.461z" fill="#35A0D6"
+                                      p-id="3748"></path>
+                                <path d="M911.647 638.005l-149.462-1.258v198.176h149.462z" fill="#D97B24"
+                                      p-id="3749"></path>
+                                <path d="M102.139 885.365V98.152H65.063v830.142h895.855v-42.929z" fill="#819292"
+                                      p-id="3750"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div style="width: 300px;height: 120px;background-color: white;border-radius: 24px">
+                        <a style="float: left">
+                            <ul style="list-style-type:none">
+                                <li style="margin-top: 20px"><span>缺陷总数</span></li>
+                                <li style="font-size: 30px" class="font-weight-bold" id="ak_qxzs">{{ ak_qxzs }}</li>
+                            </ul>
+                        </a>
+                        <a style="float: right;margin-top: 20px;margin-right: 30px;">
+                            <svg t="1675089797407" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                 xmlns="http://www.w3.org/2000/svg" p-id="6141" width="64" height="64">
+                                <path d="M960 595.84a747.84 747.84 0 0 0-113.92-32 497.92 497.92 0 0 0-6.4-69.12 485.12 485.12 0 0 0 99.2-53.44 48 48 0 1 0-56.32-77.76c-175.68 128-568.32 128-743.68 0a48 48 0 1 0-56.32 77.76 485.12 485.12 0 0 0 99.2 53.44 497.92 497.92 0 0 0-6.4 69.12 747.84 747.84 0 0 0-113.92 32A48 48 0 1 0 96 685.44a618.56 618.56 0 0 1 85.44-25.28 473.6 473.6 0 0 0 16.96 68.16 464.64 464.64 0 0 0-106.88 88.96 48 48 0 1 0 72.64 64 365.44 365.44 0 0 1 73.92-64A321.6 321.6 0 0 0 512 986.56a321.6 321.6 0 0 0 272.32-170.56 365.44 365.44 0 0 1 73.92 64 48 48 0 1 0 72.64-64 464.64 464.64 0 0 0-106.88-88.96 473.6 473.6 0 0 0 16.96-68.16 618.56 618.56 0 0 1 85.44 25.28A48 48 0 0 0 960 595.84zM309.76 152.32a243.52 243.52 0 0 0 57.28 56 357.44 357.44 0 0 0-113.6 108.8 758.4 758.4 0 0 0 517.44 0 357.44 357.44 0 0 0-113.6-108.8 243.84 243.84 0 0 0 57.28-56.32 60.16 60.16 0 1 0-53.12-40.32A179.84 179.84 0 0 1 576 176a270.4 270.4 0 0 0-128 0 179.84 179.84 0 0 1-84.8-64 60.16 60.16 0 1 0-53.44 40.32z"
+                                      fill="#d81e06" p-id="6142"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div style="width: 300px;height: 120px;background-color: white;border-radius: 24px">
+                        <a style="float: left">
+                            <ul style="list-style-type:none">
+                                <li style="margin-top: 20px"><strong>平均缺陷密度</strong></li>
+                                <li style="font-size: 30px" class="font-weight-bold" id="ak_pjqxmd">{{ ak_pjqxmd }}</li>
+                            </ul>
+                        </a>
+                        <a style="float: right;margin-top: 20px;margin-right: 30px;">
+                            <svg t="1675089886205" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                 xmlns="http://www.w3.org/2000/svg" p-id="6707" width="64" height="64">
+                                <path d="M52.736 11.264c20.992 0 39.424 15.36 43.008 36.352l0.512 7.168v877.568H977.92c20.992 0 39.424 15.36 43.008 36.352l0.512 7.168c0 20.992-15.36 39.424-36.352 43.008H9.216V54.272c0-23.552 19.456-43.008 43.52-43.008z"
+                                      fill="#343399" p-id="6708"></path>
+                                <path d="M706.048 776.704c-15.872 0-29.184-5.632-39.936-17.408-10.752-11.264-16.384-26.112-15.872-41.472 0-15.872 5.12-29.184 15.872-39.936 10.752-10.752 24.064-15.872 39.936-15.872 15.872 0 29.696 5.12 41.472 15.872s17.408 24.064 17.408 39.936c0 15.872-5.632 29.696-17.408 41.472-10.752 11.264-25.6 17.92-41.472 17.408z m0-229.376c-15.872 0-29.184-5.12-39.936-15.872-10.752-10.752-15.872-24.064-15.872-39.936s5.12-29.184 15.872-39.936c10.752-10.752 24.064-15.872 39.936-15.872 15.872 0 29.696 5.12 41.472 15.872s17.408 24.064 17.408 39.936-5.632 29.184-17.408 39.936c-11.264 10.752-26.112 16.384-41.472 15.872z m0-226.304c-15.872 0-29.184-5.12-39.936-15.872-10.752-10.752-15.872-24.064-15.872-39.936s5.12-29.696 15.872-41.472c10.24-11.264 24.576-17.92 39.936-17.408 15.872 0 29.696 5.632 41.472 17.408s17.408 25.6 17.408 41.472c0 15.872-5.632 29.184-17.408 39.936-11.264 10.24-26.112 15.872-41.472 15.872z m229.376 199.68c-19.456 0-29.184-9.728-29.184-29.184 0-19.456 9.728-29.184 29.184-29.184 17.92 0 26.624 9.728 26.624 29.184 0 19.456-8.704 29.184-26.624 29.184z m0-229.376c-19.456 0-29.184-8.704-29.184-26.624 0-19.456 9.728-29.184 29.184-29.184 17.92 0 26.624 9.728 26.624 29.184 0 17.92-8.704 26.624-26.624 26.624z m0 456.192c-19.456 0-29.184-9.728-29.184-29.184 0-17.92 9.728-26.624 29.184-26.624 17.92 0 26.624 8.704 26.624 26.624 0 19.456-8.704 29.184-26.624 29.184z m-455.68 29.184c-15.872 0-29.184-5.632-39.936-17.408-10.752-11.264-16.384-26.112-15.872-41.472 0-15.872 5.12-29.184 15.872-39.936 10.752-10.752 24.064-15.872 39.936-15.872 15.872 0 29.184 5.12 39.936 15.872 10.752 10.752 15.872 24.064 15.872 39.936 0 15.872-5.12 29.696-15.872 41.472-10.24 11.776-25.088 17.92-39.936 17.408z m-226.816-199.68c-22.528 0.512-44.032-8.192-59.904-24.064-16.896-15.872-25.6-36.352-25.6-61.44s8.704-45.568 25.6-61.44c15.872-15.872 37.376-24.064 59.904-24.064 22.528 0 44.032 8.704 59.904 24.064 16.896 15.872 25.088 36.352 25.088 61.44s-8.192 45.568-25.088 61.44c-15.872 15.36-37.376 24.064-59.904 24.064z m0-226.816c-23.04 0-43.008-8.704-59.904-25.6-16.896-16.896-25.6-36.864-25.6-59.904 0-23.04 8.704-43.008 25.6-59.904 16.896-16.896 36.864-25.6 59.904-25.6s43.008 8.704 59.904 25.6c16.896 16.896 25.088 36.864 25.088 59.904 0 23.04-8.192 43.008-25.088 59.904-16.896 16.896-36.864 25.6-59.904 25.6z m226.816-29.184c-15.872 0-29.184-5.12-39.936-15.872-10.752-10.752-15.872-24.064-15.872-39.936 0-15.872 5.12-29.696 15.872-41.472 10.24-11.264 24.576-17.92 39.936-17.408 15.872 0 29.184 5.632 39.936 17.408 10.752 11.776 15.872 25.6 15.872 41.472 0 15.872-5.12 29.184-15.872 39.936-10.752 10.24-24.064 15.872-39.936 15.872z m0 226.304c-15.872 0-29.184-5.12-39.936-15.872-10.752-10.752-15.872-24.064-15.872-39.936 0-15.872 5.12-29.184 15.872-39.936 10.752-10.752 24.064-15.872 39.936-15.872 15.872 0 29.184 5.12 39.936 15.872 10.752 10.752 15.872 24.064 15.872 39.936s-5.12 29.184-15.872 39.936c-10.752 10.752-24.064 15.872-39.936 15.872z m-226.816 256c-23.04 0-43.008-8.192-59.904-25.088-16.896-16.896-25.6-36.864-25.6-59.904s8.704-43.008 25.6-59.904c16.896-16.896 36.864-25.088 59.904-25.088 23.04 0 43.008 8.192 59.904 25.088 16.896 16.896 25.088 36.864 25.088 59.904 0 23.04-8.192 43.008-25.088 59.904-16.896 16.896-36.864 25.088-59.904 25.088z"
+                                      fill="#F59D0D" p-id="6709"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div style="width: 300px;height: 120px;background-color: white;border-radius: 24px">
+                        <a style="float: left">
+                            <ul style="list-style-type:none">
+                                <li style="margin-top: 20px"><span>平均一次性关闭率</span></li>
+                                <li style="font-size: 30px;color: red;"
+                                    class="font-weight-bold" id="ak_pjycxgbl">
+                                    {{ ak_pjycxgbl }}
+                                </li>
+                            </ul>
+                        </a>
+                        <a style="float: right;margin-top: 20px;margin-right: 30px;">
+                            <svg t="1675089951515" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                 xmlns="http://www.w3.org/2000/svg" p-id="11809" width="64" height="64">
+                                <path d="M707.351564 39.030242a31.992002 31.992002 0 0 0-24.313921 58.865284 447.888028 447.888028 0 1 1-349.992502 3.1992 31.992002 31.992002 0 1 0-25.593602-58.225443 511.872032 511.872032 0 1 0 399.900025-3.839041z"
+                                      fill="#1296db" p-id="11810"></path>
+                                <path d="M340.083381 281.529618a31.992002 31.992002 0 0 0-38.390402-51.187204 351.912022 351.912022 0 1 0 406.938265-9.5976 31.992002 31.992002 0 0 0-35.831042 53.106723 287.928018 287.928018 0 1 1-332.716821 7.678081z"
+                                      fill="#1296db" p-id="11811"></path>
+                                <path d="M512.200352 383.904024a31.992002 31.992002 0 0 0 31.992002-31.992002v-319.92002a31.992002 31.992002 0 0 0-63.984004 0v319.92002A31.992002 31.992002 0 0 0 512.200352 383.904024z"
+                                      fill="#1296db" p-id="11812"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12" style="padding: 0px;width: 100%">
+            <div class="card">
+                <div class="card-header">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-bar-chart-line-fill" viewBox="0 0 16 16">
+                        <path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2z"/>
+                    </svg>
+                    <strong>迭代缺陷折线图</strong>
+
+                    <!-- Button trigger modal -->
+                    {% comment %}                    <div style="float: right;">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cksjy"
+                                href="/ak/ankuan_add/">
+                            查看数据源
+                        </button>
+                    </div>
+
+                    <div style="float: right;margin-right: 20px">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sjrk">
+                            数据入库
+                        </button>
+                    </div>{% endcomment %}
+                </div>
+                <div class="card-body">
+                    <div style="height: 400px;vertical-align: center" id="ak-bar1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="cksjy" data-backdrop="static" data-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content" style="width: 700px">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">查看数据源</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="padding: 0px;">
+                    <div class="modal-body" style="height: 400px">
+                        <div class="card" style="position: relative">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">系统名</th>
+                                    <th scope="col">版本号</th>
+                                    <th scope="col">发布日期</th>
+                                    <th scope="col">缺陷总数</th>
+                                    <th scope="col">缺陷密度</th>
+                                    <th scope="col">一次性关闭率</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for obj in queryset %}
+                                    <tr>
+                                        <th>{{ obj.id }}</th>
+                                        <td>{{ obj.get_n_systemtype_display }}</td>
+                                        <td>{{ obj.c_version }}</td>
+                                        <td>{{ obj.dt_publish_date|date:"Y-m-d" }}</td>
+                                        <td>{{ obj.n_qxsl }}</td>
+                                        <td>{{ obj.n_qxmd }}</td>
+                                        <td>{{ obj.n_ycxgbl }}%</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    {#                    <button type="button" class="btn btn-primary">Understood</button>#}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="sjrk" data-backdrop="static" data-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content" style="width: 600px">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">迭代数据添加页面</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="height: 800px;">
+                    <form method="post" action="/ak/ak_add/">
+                        <div class="form-row">
+                            {% csrf_token %}
+                            {% for foo in form %}
+                                <div class="form-group col-md-6">
+                                    <label>{{ foo.label }}</label>
+                                    {{ foo }}
+                                    <span style="color: red">{{ foo.errors.0 }}</span>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">保存</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-sm-6" style="padding: 0px">
+            <div class="card">
+                <div class="card-header">
+                    严重缺陷统计
+                </div>
+                <div class="card-body">
+                    <div style="height: 400px;" id="bar_yzqx"></div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-6" style="padding: 0px">
+            <div class="card">
+                <div class="card-header">
+                    前端问题统计
+                </div>
+                <div class="card-body">
+                    <div style="height: 400px;" id="bar_qdwt"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'js/macarons.js' %}"></script>
+    <script src="{% static 'js/shine.js' %}"></script>
+    <script src="{% static 'js/infographic.js' %}"></script>
+
+    <script type="text/javascript">
+
+        $(function () {
+            initBar1();
+            Bar_yzqx();
+        })
+
+        function initBar1() {
+            // 基于准备好的dom，初始化echarts实例
+            var myChart1 = echarts.init(document.getElementById('ak-bar1'));
+
+            {% comment %}            window.addEventListener('resize', function () {
+                            myChart1.resize();
+                        });{% endcomment %}
+
+            // 指定图表的配置项和数据
+            var option = {
+                dataZoom: [{
+                    type: 'slider',
+                    show: true, // flase直接隐藏图形
+                    xAxisIndex: [0],
+                    left: '9%', // 滚动条靠左侧的百分比
+                    bottom: -5,
+                    start: 10, // 滚动条的起始位置（10%）
+                    end: 100 // 滚动条的终止位置（90%）
+                }],
+                title: {
+                    {#text: '员工业绩阅读汇总信息',#}
+                    {#textAlign: "auto",#}
+                    {#left: "center",#}
+                },
+                tooltip: {
+                    position: function (point, params, dom, rect, size) {
+                        // 鼠标坐标和提示框位置的参考坐标系是：以外层div的左上角那一点为原点，x轴向右，y轴向下
+                        // 提示框位置
+                        var x = 0; // x坐标位置
+                        var y = 0; // y坐标位置
+
+                        // 当前鼠标位置
+                        var pointX = point[0];
+                        var pointY = point[1];
+
+                        // 外层div大小
+                        // var viewWidth = size.viewSize[0];
+                        // var viewHeight = size.viewSize[1];
+
+                        // 提示框大小
+                        var boxWidth = size.contentSize[0];
+                        var boxHeight = size.contentSize[1];
+
+                        // boxWidth > pointX 说明鼠标左边放不下提示框
+                        if (boxWidth > pointX) {
+                            x = 5;
+                        } else { // 左边放的下
+                            x = pointX - boxWidth;
+                        }
+
+                        // boxHeight > pointY 说明鼠标上边放不下提示框
+                        if (boxHeight > pointY) {
+                            y = 5;
+                        } else { // 上边放得下
+                            y = pointY - boxHeight;
+                        }
+
+                        return [x, y];
+
+                    },
+                },
+                legend: {
+                    data: [],  // 后台获取
+                    bottom: 0,
+                    orient: 'vertical',
+                    left: 10,
+                    top: 'center'
+                },
+                xAxis: {
+                    {#data: []  // 后台获取#}
+                    type: 'category',
+                    data: [],
+                },
+                yAxis: {},
+                series: []  // 后台获取
+            };
+
+            $.ajax({
+                url: "/ak/bar1/",
+                type: "get",
+                dataType: "JSON",
+                success: function (res) {
+                    // 将后台返回的数据，更新到option中。
+                    if (res.status) {
+                        option.legend.data = res.data.legend;
+                        {#option.xAxis.data = res.data.x_axis;#}
+                        option.series = res.data.series_list;
+
+                        option.xAxis.data = res.data.x_axis
+
+                        // 使用刚指定的配置项和数据显示图表。
+                        myChart1.setOption(option);
+                    }
+                }
+            })
+
+            {% comment %}
+            监听：bar1_数据变化
+            {% endcomment %}
+            $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
+                    start_Date = picker.startDate.format('YYYY-MM-DD');
+                    end_Date = picker.endDate.format('YYYY-MM-DD');
+
+                    $.ajax({
+                        url: "/ak/change_date_bar1/",
+                        type: "post",
+                        dataType: "JSON",
+                        data: {
+                            start_date: start_Date,
+                            end_date: end_Date,
+                        },
+                        success: function (res) {
+
+                            if (res.status) {
+                                option.xAxis.data = res.data.x_axis;
+                                option.series = res.data.series_list;
+                                // 使用刚指定的配置项和数据显示图表。
+
+                                myChart1.setOption(option);
+                            }
+                        }
+                    })
+                }
+            );
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart1.setOption(option);
+
+        }
+
+        function Bar_yzqx() {
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('bar_yzqx'));
+
+            window.addEventListener('resize', function () {
+                myChart.resize();
+            });
+
+            // 指定图表的配置项和数据
+            var option = {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {type: 'cross'},
+                    position: function (point, params, dom, rect, size) {
+                        // 鼠标坐标和提示框位置的参考坐标系是：以外层div的左上角那一点为原点，x轴向右，y轴向下
+                        // 提示框位置
+                        var x = 0; // x坐标位置
+                        var y = 0; // y坐标位置
+
+                        // 当前鼠标位置
+                        var pointX = point[0];
+                        var pointY = point[1];
+
+                        // 外层div大小
+                        // var viewWidth = size.viewSize[0];
+                        // var viewHeight = size.viewSize[1];
+
+                        // 提示框大小
+                        var boxWidth = size.contentSize[0];
+                        var boxHeight = size.contentSize[1];
+
+                        // boxWidth > pointX 说明鼠标左边放不下提示框
+                        if (boxWidth > pointX) {
+                            x = 5;
+                        } else { // 左边放的下
+                            x = pointX - boxWidth;
+                        }
+
+                        // boxHeight > pointY 说明鼠标上边放不下提示框
+                        if (boxHeight > pointY) {
+                            y = 5;
+                        } else { // 上边放得下
+                            y = pointY - boxHeight;
+                        }
+
+                        return [x, y];
+
+                    },
+                },
+                legend: {},
+                xAxis: [
+                    {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        data: [] //后台传入x轴
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value',
+                        name: '版本缺陷数',
+                        min: 0,
+                        max: 100,
+                        position: 'right',
+                        axisLabel: {
+                            formatter: '{value}'
+                        }
+                    },
+                    {
+                        type: 'value',
+                        name: '严重缺陷占比',
+                        min: 0,
+                        max: 100,
+                        position: 'left',
+                        axisLabel: {
+                            formatter: '{value} %'
+                        }
+                    }
+                ],
+                series: [],
+            };
+
+            $.ajax({
+                url: "/ab/yzqx/",
+                type: "get",
+                dataType: "JSON",
+                success: function (res) {
+                    // 将后台返回的数据，更新到option中。
+                    if (res.status) {
+                        //横轴
+                        option.xAxis[0].data = res.data.x_axis;
+
+                        option.series = res.data.series_list;
+
+                        // 使用刚指定的配置项和数据显示图表。
+                        myChart.setOption(option);
+                    }
+                }
+            })
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        }
+    </script>
+
+    {% comment %}日期选择器{% endcomment %}
+    <script type="text/javascript">
+        $(function () {
+            data_choose();
+        })
+
+        function data_choose() {
+            function getCurrentNow() {
+                var myDate = new Date();
+                var tYear = myDate.getFullYear()
+                tMonth = "01"
+                tDay = "01"
+
+                return tYear + "-" + tMonth + "-" + tDay
+            }
+
+            {#var start = moment().subtract(29, 'days');#}
+            var start = moment().startOf('year');
+            var end = moment();
+
+            function cb(start, end) {
+                $('#reportrange span').html(start.format('YYYY-MM-DD') + ' - ' + end.format('YYYY-MM-DD'));
+            }
+
+            $('#reportrange').daterangepicker({
+                startDate: start,
+                endDate: end,
+                ranges: {
+                    '上月': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                    '今年': [moment().startOf('year'), moment().endOf('year')],
+                    '去年': [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')],
+                },
+            }, cb);
+
+            cb(start, end);
+
+        }
+    </script>
+
+    {#    四大项数据变化#}
+    <script type="text/javascript">
+        // using jQuery
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie != '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        var csrftoken = getCookie('csrftoken');
+
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+
+        $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
+                console.log(picker.startDate.format('YYYY-MM-DD'));
+                console.log(picker.endDate.format('YYYY-MM-DD'));
+                start_Date = picker.startDate.format('YYYY-MM-DD');
+                end_Date = picker.endDate.format('YYYY-MM-DD');
+
+                $.ajax({
+                    url: "/ak/change_date/",
+                    type: "post",
+                    dataType: "JSON",
+                    data: {
+                        start_date: start_Date,
+                        end_date: end_Date,
+                    },
+                    success: function (res) {
+                        if (res.status) {
+                            document.getElementById("ak_bbs").innerText = res['age']
+                            document.getElementById("ak_qxzs").innerText = res['qxzs']
+                            document.getElementById("ak_pjqxmd").innerText = res['pjqxmd']
+                            document.getElementById("ak_pjycxgbl").innerText = res['pjycxgbl']
+                            console.log({{ ak_bbs }})
+                        }
+                    }
+                })
+            }
+        );
+
+    </script>
+
+
+{% endblock %}

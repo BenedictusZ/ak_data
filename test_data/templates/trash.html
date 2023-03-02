@@ -1,0 +1,522 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block content %}
+    <div style="height: 600px;width: 600px" id="main1"></div>
+    <div style="width:100%;height:600px;border: solid red" id="main"></div>
+    <div style="width:100%;height:600px;border: solid red" id="bar2"></div>
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            bar1();
+            bar3();
+            initBar2();
+        })
+
+        function bar1() {
+            var chartDom = document.getElementById('main1');
+            var myChart = echarts.init(chartDom);
+            var option;
+
+            option = {
+                title: {
+                    text: 'Nightingale Chart',
+                    subtext: 'Fake Data',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{a} <br/>{b} : {c} ({d}%)'
+                },
+                legend: {
+                    left: 'center',
+                    top: 'bottom',
+                    data: [
+                        'rose1',
+                        'rose2',
+                        'rose3',
+                        'rose4',
+                        'rose5',
+                        'rose6',
+                        'rose7',
+                        'rose8'
+                    ]
+                },
+                toolbox: {
+                    show: true,
+                    feature: {
+                        mark: {show: true},
+                        dataView: {show: true, readOnly: false},
+                        restore: {show: true},
+                        saveAsImage: {show: true}
+                    }
+                },
+                series: [
+                    {
+                        name: 'Radius Mode',
+                        type: 'pie',
+                        radius: [20, 140],
+                        center: ['25%', '50%'],
+                        roseType: 'radius',
+                        itemStyle: {
+                            borderRadius: 5
+                        },
+                        label: {
+                            show: false
+                        },
+                        emphasis: {
+                            label: {
+                                show: true
+                            }
+                        },
+                        data: [
+                            {value: 40, name: 'rose 1'},
+                            {value: 33, name: 'rose 2'},
+                            {value: 28, name: 'rose 3'},
+                            {value: 22, name: 'rose 4'},
+                            {value: 20, name: 'rose 5'},
+                            {value: 15, name: 'rose 6'},
+                            {value: 12, name: 'rose 7'},
+                            {value: 10, name: 'rose 8'}
+                        ]
+                    },
+                    {
+                        name: 'Area Mode',
+                        type: 'pie',
+                        radius: [20, 140],
+                        center: ['75%', '50%'],
+                        roseType: 'area',
+                        itemStyle: {
+                            borderRadius: 5
+                        },
+                        data: [
+                            {value: 30, name: 'rose 1'},
+                            {value: 28, name: 'rose 2'},
+                            {value: 26, name: 'rose 3'},
+                            {value: 24, name: 'rose 4'},
+                            {value: 22, name: 'rose 5'},
+                            {value: 20, name: 'rose 6'},
+                            {value: 18, name: 'rose 7'},
+                            {value: 16, name: 'rose 8'}
+                        ]
+                    }
+                ]
+            };
+
+            option && myChart.setOption(option);
+        }
+
+        function bar3() {
+            {% comment %}
+                参考网址：https://blog.csdn.net/u014361280/article/details/121457228
+            {% endcomment %}
+
+            var dataList = [
+                {% comment %} {
+                     name: "南海诸岛", value:
+                         0
+                 },
+                 {
+                     name: '北京', value:
+                         0
+                 },
+                 {
+                     name: '天津', value:
+                         0
+                 },
+                 {
+                     name: '上海', value:
+                         0
+                 },
+                 {
+                     name: '重庆', value:
+                         0
+                 },
+                 {
+                     name: '河北', value:
+                         0
+                 },
+                 {
+                     name: '河南', value:
+                         0
+                 },
+                 {
+                     name: '云南', value:
+                         0
+                 },
+                 {
+                     name: '辽宁', value:
+                         0
+                 },
+                 {
+                     name: '黑龙江', value:
+                         0
+                 },
+                 {
+                     name: '湖南', value:
+                         0
+                 },
+                 {
+                     name: '安徽', value:
+                         0
+                 },
+                 {
+                     name: '山东', value:
+                         0
+                 },
+                 {
+                     name: '新疆', value:
+                         0
+                 },
+                 {
+                     name: '江苏', value:
+                         0
+                 },
+                 {
+                     name: '浙江', value:
+                         0
+                 },
+                 {
+                     name: '江西', value:
+                         0
+                 },
+                 {
+                     name: '湖北', value:
+                         0
+                 },
+                 {
+                     name: '广西', value:
+                         0
+                 },
+                 {
+                     name: '甘肃', value:
+                         0
+                 },
+                 {
+                     name: '山西', value:
+                         0
+                 },
+                 {
+                     name: '内蒙古', value:
+                         0
+                 },
+                 {
+                     name: '陕西', value:
+                         0
+                 },
+                 {
+                     name: '吉林', value:
+                         0
+                 },
+                 {
+                     name: '福建', value:
+                         0
+                 },
+                 {
+                     name: '贵州', value:
+                         0
+                 },
+                 {
+                     name: '广东', value:
+                         0
+                 },
+                 {
+                     name: '青海', value:
+                         0
+                 },
+                 {
+                     name: '西藏', value:
+                         0
+                 },
+                 {
+                     name: '四川', value:
+                         20
+                 },
+                 {
+                     name: '宁夏', value:
+                         0
+                 },
+                 {
+                     name: '海南', value:
+                         0
+                 },
+                 {
+                     name: '台湾', value:
+                         0
+                 },
+                 {
+                     name: '香港', value:
+                         0
+                 },
+                 {
+                     name: '澳门', value:
+                         0
+                 }{% endcomment %}
+            ]
+            var myChart = echarts.init(document.getElementById('main'), 'macarons');
+
+            var convertData = function (data) {
+                var res = [];
+                for (var i = 0; i < data.length; i++) {
+                    var geoCoord = geoCoordMap[data[i].name];
+                    if (geoCoord) {
+                        res.push(geoCoord.concat(data[i].value));
+                    }
+                }
+                return res;
+            };
+
+            option = {
+                tooltip: {
+                    position: function (point, params, dom, rect, size) {
+                        // 鼠标坐标和提示框位置的参考坐标系是：以外层div的左上角那一点为原点，x轴向右，y轴向下
+                        // 提示框位置
+                        var x = 0; // x坐标位置
+                        var y = 0; // y坐标位置
+
+                        // 当前鼠标位置
+                        var pointX = point[0];
+                        var pointY = point[1];
+
+                        // 外层div大小
+                        // var viewWidth = size.viewSize[0];
+                        // var viewHeight = size.viewSize[1];
+
+                        // 提示框大小
+                        var boxWidth = size.contentSize[0];
+                        var boxHeight = size.contentSize[1];
+
+                        // boxWidth > pointX 说明鼠标左边放不下提示框
+                        if (boxWidth > pointX) {
+                            x = 5;
+                        } else { // 左边放的下
+                            x = pointX - boxWidth;
+                        }
+
+                        // boxHeight > pointY 说明鼠标上边放不下提示框
+                        if (boxHeight > pointY) {
+                            y = 5;
+                        } else { // 上边放得下
+                            y = pointY - boxHeight;
+                        }
+
+                        return [x, y];
+
+                    },
+                    backgroundColor: "#2D8CF0",
+                    formatter: function (params, ticket, callback) {
+                        if (params.value)
+                            return params.seriesName + '<br />' + params.name + '：' + params.value
+                        else
+                            return params.seriesName + '<br />' + params.name + '：' + '暂无数据'
+                    }//数据格式化
+                },
+                visualMap: {
+                    min: 0,
+                    max: null,
+                    left: 'left',
+                    top: 'bottom',
+                    {% comment 原始样式信息%}                    text: ['高', '低'],//取值范围的文字
+                                        inRange: {
+                                            color: ['#e0ffff', '#f00c08']//取值范围的颜色
+                                        },{% endcomment %}
+                    splitNumber: 5,
+                    color: ['#d32033', '#eac736', '#50a3ba'],
+                    textStyle: {
+                        color: '#000000'
+                    },
+                    {% comment %}show: true//图注{% endcomment %}
+                },
+                geo: {
+                    map: 'china',
+                    roam: false,//不开启缩放和平移
+                    zoom: 1.23,//视角缩放比例
+                    label: {
+                        normal: {
+                            show: true,
+                            fontSize: '10',
+                            color: 'rgba(0,0,0,0.7)'
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            borderColor: 'rgba(0, 0, 0, 0.2)'
+                        },
+                        emphasis: {
+                            areaColor: '#F3B329',//鼠标选择区域颜色
+                            shadowOffsetX: 0,
+                            shadowOffsetY: 0,
+                            shadowBlur: 20,
+                            borderWidth: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                },
+                toolbox: {
+                    show: true,
+                    feature: {
+                        mark: {show: true},
+                        dataView: {show: true, readOnly: true},
+                        saveAsImage: {show: true}
+                    }
+                },
+                series: [
+                    {
+                        name: '工单数量',
+                        type: 'map',
+                        geoIndex: 0,
+                        data: dataList
+                    }
+                ]
+            };
+            $.ajax({
+                url: "/trash/map1/",
+                type: "get",
+                dataType: "JSON",
+                success: function (res) {
+                    // 将后台返回的数据，更新到option中。
+                    if (res.status) {
+                        {#//横轴#}
+                        {#option.xAxis[0].data = res.data.x_axis;#}
+                        {##}
+                        dataList = res.data.series_list;
+                        option.visualMap.max = res.data.max_value
+
+                        // 使用刚指定的配置项和数据显示图表。
+                        myChart.setOption(option);
+                    }
+                }
+            })
+
+            myChart.setOption(option);
+
+            myChart.on('click', function (params) {
+                alert(params.name);
+            });
+
+            setTimeout(function () {
+                myChart.setOption({
+                    series: [
+                        {
+                            name: '工单数量',
+                            type: 'map',
+                            geoIndex: 0,
+                            data: dataList
+                        }
+                    ]
+                });
+            }, 1000)
+        }
+
+        function initBar2() {
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('bar2'));
+
+            window.addEventListener('resize', function () {
+                myChart.resize();
+            });
+
+            // 指定图表的配置项和数据
+            var option = {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {type: 'cross'},
+                    position: function (point, params, dom, rect, size) {
+                        // 鼠标坐标和提示框位置的参考坐标系是：以外层div的左上角那一点为原点，x轴向右，y轴向下
+                        // 提示框位置
+                        var x = 0; // x坐标位置
+                        var y = 0; // y坐标位置
+
+                        // 当前鼠标位置
+                        var pointX = point[0];
+                        var pointY = point[1];
+
+                        // 外层div大小
+                        // var viewWidth = size.viewSize[0];
+                        // var viewHeight = size.viewSize[1];
+
+                        // 提示框大小
+                        var boxWidth = size.contentSize[0];
+                        var boxHeight = size.contentSize[1];
+
+                        // boxWidth > pointX 说明鼠标左边放不下提示框
+                        if (boxWidth > pointX) {
+                            x = 5;
+                        } else { // 左边放的下
+                            x = pointX - boxWidth;
+                        }
+
+                        // boxHeight > pointY 说明鼠标上边放不下提示框
+                        if (boxHeight > pointY) {
+                            y = 5;
+                        } else { // 上边放得下
+                            y = pointY - boxHeight;
+                        }
+
+                        return [x, y];
+
+                    },
+                },
+                legend: {},
+                xAxis: [
+                    {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        data: [] //后台传入x轴
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value',
+                        name: 'xx',
+                        min: 0,
+                        max: 250,
+                        position: 'right',
+                        axisLabel: {
+                            formatter: '{value} ml'
+                        }
+                    },
+                    {
+                        type: 'value',
+                        name: 'yy',
+                        min: 0,
+                        max: 25,
+                        position: 'left',
+                        axisLabel: {
+                            formatter: '{value} %'
+                        }
+                    }
+                ],
+                series: []
+            };
+
+            $.ajax({
+                url: "/trash/bar2/",
+                type: "get",
+                dataType: "JSON",
+                success: function (res) {
+                    // 将后台返回的数据，更新到option中。
+                    if (res.status) {
+                        //横轴
+                        option.xAxis[0].data = res.data.x_axis;
+
+                        option.series = res.data.series_list;
+
+                        // 使用刚指定的配置项和数据显示图表。
+                        myChart.setOption(option);
+                    }
+                }
+            })
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        }
+
+    </script>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block css %}
+    {# Include FontAwesome; required for icon display #}
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css">
+    {{ form.media }}
+{% endblock %}
+
+
+{% block content %}
+    <div class="row" style="height: 60px;">
+        <div class="col-sm-11">
+            <div style="float: left;margin-top: 8px">
+                <div style="font-size: 30px">
+                    迭代数据列表
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <div class="right" style="float: right;;margin-top: 10px">
+                <button type="button" class="btn btn-primary">
+                    <a href="/ordata/add/" class="text-white">数据入库</a>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <table class="table table-bordered table-hover">
+            <caption>这是【工单数据】列表，主要展示相关统计指标，可进行数据新增、删除、编辑功能操作</caption>
+            <thead class="thead" style="background-color: #9980c9">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for obj in queryset %}
+                <tr>
+                    <th>{{ obj.c_id }}</th>
+                    <td>
+                        <a class="btn btn-primary btn-xs" href="/admin/{{ obj.id }}/edit/">编辑</a>
+                        <a class="btn btn-danger btn-xs" href="/admin/{{ obj.id }}/delete/">删除</a>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+
+        <ul class="pagination">
+            {{ page_string }}
+        </ul>
+    </div>
+
+
+
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}
