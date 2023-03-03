@@ -27,27 +27,43 @@ def ankuan_datedat(start, end):
 
     ak_qxzs_sum = qxzs_queryset['aa']
 
+    if ak_qxzs_sum == None:
+
+        ak_qxzs_sum = 0
+
     # 3、平均缺陷密度
     bb_count = TestData.objects.filter(n_systemtype=1, dt_publish_date__gte=start,
                                        dt_publish_date__lte=end).all().count()
-    sum_qxmd = TestData.objects.filter(n_systemtype=1, dt_publish_date__gte=start,
-                                       dt_publish_date__lte=end).all().aggregate(
+    qxmd = TestData.objects.filter(n_systemtype=1, dt_publish_date__gte=start,
+                                   dt_publish_date__lte=end).all().aggregate(
         bb=Sum('n_qxmd'))
 
-    result = sum_qxmd['bb'] / bb_count
+    sum_qxmd = qxmd['bb']
 
-    avg_qxmd = '%.2f' % result
+    if (bb_count == 0) or (sum_qxmd == 0):
+        result = 0
+        avg_qxmd = '%.2f' % result
+    else:
+        result = sum_qxmd / bb_count
+
+        avg_qxmd = '%.2f' % result
 
     #
 
     # 4、平均一次性关闭率
-    sum_ycxgbl = TestData.objects.filter(n_systemtype=1, dt_publish_date__gte=start,
-                                         dt_publish_date__lte=end).all().aggregate(
+    ycxgbl = TestData.objects.filter(n_systemtype=1, dt_publish_date__gte=start,
+                                     dt_publish_date__lte=end).all().aggregate(
         cc=Sum('n_ycxgbl'))
 
-    ycx_result = sum_ycxgbl['cc'] / bb_count
+    sum_ycxgbl = ycxgbl['cc']
 
-    avg_ycxgbl = '%.2f' % ycx_result
+    if (bb_count == 0) or (sum_ycxgbl == 0):
+        ycx_result = 0
+        avg_ycxgbl = '%.2f' % ycx_result
+    else:
+        ycx_result = sum_ycxgbl / bb_count
+
+        avg_ycxgbl = '%.2f' % ycx_result
 
     ak_bbs = ak_publish_count
     ak_qxzs = ak_qxzs_sum
